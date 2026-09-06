@@ -1,43 +1,109 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
+import { Briefcase, Home, Image as ImageIcon, MessageSquare, User } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 const NAV_ITEMS = [
-  { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'About', href: '/about' },
-  { label: 'Memories', href: '/memories' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Home', href: '/', icon: Home },
+  { label: 'Projects', href: '/projects', icon: Briefcase },
+  { label: 'About', href: '/about', icon: User },
+  { label: 'Memories', href: '/memories', icon: ImageIcon },
+  { label: 'Contact', href: '/contact', icon: MessageSquare },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/40 border-b border-white/10">
-      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-bold text-lg tracking-wider text-white">
-          SULTANAT<span className="text-purple-500">.</span>
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+      <nav className="flex items-center gap-4 px-1.5 py-1.5 rounded-full border border-zinc-[#0000001A] dark:border-[#FFFFFF1A] bg-white dark:bg-[#181818] backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/40 transition-colors duration-300">
+        
+        {/* Profile Avatar */}
+        <Link href="/" className="relative shrink-0 group">
+          <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#FFFFFF4D] transition-transform group-hover:scale-105">
+            <Image
+              src="/icons/avatar.svg" 
+              alt="Sultanat Profile"
+              fill
+              className="object-cover"
+            />
+          </div>
         </Link>
-
-        <ul className="flex items-center gap-8">
-          {NAV_ITEMS.map((item) => {
+        {/* Navigation Items */}
+        <ul className="flex items-center gap-1 relative">
+          {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href;
+            const Icon = item.icon;
+            const isHovered = hoveredIndex === index;
+
             return (
-              <li key={item.href}>
+              <li key={item.href} className="relative">
                 <Link
                   href={item.href}
-                  className={`text-sm transition-colors ${
-                    isActive ? 'text-white font-semibold' : 'text-zinc-400 hover:text-white'
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className={`relative flex items-center gap-2 px-3 py-2 rounded-full text-sm transition-colors duration-200 ${
+                    isActive
+                      ? 'text-zinc-900 dark:text-white font-medium'
+                      : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                   }`}
                 >
-                  {item.label}
+                  <Icon className="w-4 h-4 relative z-10" />
+
+                  {/* Text expansion on hover */}
+                  <AnimatePresence>
+                    {(isHovered || isActive) && (
+                      <motion.span
+                        initial={{ opacity: 0, width: 0 }}
+                        animate={{ opacity: 1, width: 'auto' }}
+                        exit={{ opacity: 0, width: 0 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        className="overflow-hidden whitespace-nowrap text-xs font-medium relative z-10"
+                      >
+                        {item.label}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Shooting Star Underline Effect */}
+                  {isHovered && (
+                    <motion.div
+                      layoutId="shooting-star-underline"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent rounded-full"
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      animate={{ scaleX: 1, opacity: 1 }}
+                      exit={{ scaleX: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    />
+                  )}
+
+                  {/* Background Hover Pill Highlight */}
+                  {isHovered && (
+                    <motion.div
+                      layoutId="hover-pill"
+                      className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800/60 rounded-full -z-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                    />
+                  )}
                 </Link>
               </li>
             );
           })}
         </ul>
+
+        {/* Theme Toggle Button */}
+        <div className="pl-1 border-l border-zinc-200 dark:border-zinc-800">
+          <ThemeToggle />
+        </div>
       </nav>
     </header>
   );
