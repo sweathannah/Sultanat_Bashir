@@ -22,18 +22,18 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <nav className="flex items-center gap-4 px-1.5 py-1.5 rounded-full border border-zinc-[#0000001A] dark:border-[#FFFFFF1A] bg-white dark:bg-[#181818] backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/40 transition-colors duration-300">
+      <nav className="flex items-center gap-2 px-1.5 py-1.5 rounded-full border border-zinc-[#0000001A] dark:border-[#FFFFFF1A] bg-white dark:bg-[#181818] backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/40 transition-colors duration-300">
         
         {/* Profile Avatar */}
-        <Link href="/" className="relative shrink-0 group">
-          <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#FFFFFF4D] transition-transform group-hover:scale-105">
-            <Image
-              src="/icons/avatar.svg" 
-              alt="Sultanat Profile"
-              fill
-              className="object-cover"
-            />
-          </div>
+        <Link href="/" className="shrink-0 group block">
+          <Image
+            src="/icons/avatar.svg"
+            alt="Sultanat Profile"
+            width={56}
+            height={56}
+            priority
+            className="w-14 h-14 m-auto rounded-full object-cover  transition-transform duration-200 group-hover:scale-105"
+          />
         </Link>
         {/* Navigation Items */}
         <ul className="flex items-center gap-1 relative">

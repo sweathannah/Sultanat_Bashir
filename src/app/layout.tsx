@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-white text-zinc-900 dark:bg-black dark:text-white antialiased selection:bg-purple-500 selection:text-white transition-colors duration-300`}>
+      <body className={`${inter.className} text-zinc-900 dark:text-white antialiased selection:bg-purple-500 selection:text-white transition-colors duration-300 bg-[#FAFAFA] dark:bg-[#0F0F0F] `}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <main className="pt-16 min-h-screen">
