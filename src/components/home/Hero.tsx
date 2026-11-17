@@ -78,7 +78,7 @@ export default function Hero() {
         {/* Eyebrow: Founder, [Logo] HerDeen */}
         <motion.div
           variants={fadeUpVariants}
-          className="inline-flex items-center gap-2.5 lg:mb-8 mb-4 text-[0.94rem] text-[#000000B2] dark:text-[#FFFFFFB2]"
+          className="inline-flex items-center gap-2.5 lg:mb-5 mb-2 text-[0.94rem] text-[#000000B2] dark:text-[#FFFFFFB2]"
         >
           <span>Founder,</span>
             <a 
@@ -103,19 +103,21 @@ export default function Hero() {
 
         {/* Hero Headline with Inline Photo Tiles */}
         <motion.h1
-          variants={fadeUpVariants}
-          className="lg:text-[2rem] text-[1.5rem] leading-[1.3] tracking-tight"
+            variants={fadeUpVariants}
+            className="lg:text-[3rem] text-[2rem] leading-[1.3] tracking-tight flex flex-wrap items-center w-full text-[#000000] dark:text-[#FFFFFF]"
         >
-            <span className="block lg:text-[3rem] text-[2rem] mb-2.5 text-[#000000] dark:text-[#FFFFFF] font-normal">
-                Hi, I&apos;m{' '}
-                <InlineBadgePhoto
-                    src="/images/hero-1.svg"
-                    alt="Sultanat portrait"
-                />{' '}
-                Sultanat.
-            </span>
+            <span>Hi, I&apos;m</span>
+            <Image
+                src="/images/hero-1.svg"
+                alt="Sultanat"
+                width={80}
+                height={80}
+                className="w-14 h-14 lg:w-20 lg:h-20 object-contain translate-y-1.5 inline-flex items-center justify-center transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
+            />
+            <span>Sultanat.</span>
+            
 
-          <span className="block font-normal text-[#525252] dark:text-zinc-400">
+          {/*<span className="block font-normal text-[#525252] dark:text-zinc-400">
             A{' '}
             <InlineBadgePhoto
               src="/images/hero-2.svg"
@@ -127,8 +129,48 @@ export default function Hero() {
               alt="Sultanat developer snapshot"
             />{' '}
             who loves bringing designs and ideas to life on the web.
-          </span>
+          </span> */}
         </motion.h1>
+
+        {/* Hero Headline with Inline Photo Tiles */}
+        <motion.h2 
+            variants={fadeUpVariants}
+            className="lg:text-[2rem] text-[1.5rem] tracking-tight flex flex-wrap items-center w-[90%] text-[#000000B2] dark:text-[#FFFFFF] font-normal"
+        >
+            <span>A </span>
+            <Image
+                src="/images/hero-2.svg"
+                alt="Sultanat"
+                width={80}
+                height={80}
+                className="w-14 h-14 lg:w-20 lg:h-20 object-contain translate-y-1.5 inline-flex items-center justify-center transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
+            />
+            <span>Frontend Developer </span>
+            <Image
+                src="/images/hero-3.svg"
+                alt="Sultanat"
+                width={80}
+                height={80}
+                className="w-14 h-14 lg:w-20 lg:h-20 object-contain translate-y-1.5 inline-flex items-center justify-center transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
+            />
+            <span>who loves</span>
+            <span>bringing designs and ideas to life on the <br /> web. </span>
+            
+
+          {/*<span className="block font-normal text-[#525252] dark:text-zinc-400">
+            A{' '}
+            <InlineBadgePhoto
+              src="/images/hero-2.svg"
+              alt="Sultanat snapshot"
+            />{' '}
+            Frontend Developer{' '}
+            <InlineBadgePhoto
+              src="/images/hero-3.svg"
+              alt="Sultanat developer snapshot"
+            />{' '}
+            who loves bringing designs and ideas to life on the web.
+          </span> */}
+        </motion.h2>
 
         {/* Action Pill Buttons */}
         <motion.div

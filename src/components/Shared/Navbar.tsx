@@ -21,8 +21,8 @@ export default function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <nav className="flex items-center gap-2 px-1.5 py-1.5 rounded-full border border-zinc-[#0000001A] dark:border-[#FFFFFF1A] bg-white dark:bg-[#181818] backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/40 transition-colors duration-300">
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pt-10">
+      <nav className="flex items-center gap-2 px-1.5 py-1.5 rounded-full border border-[#0000001A] dark:border-[#FFFFFF1A] bg-white dark:bg-[#181818] backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/40 transition-colors duration-300">
         
         {/* Profile Avatar */}
         <Link href="/" className="shrink-0 group block">
@@ -36,7 +36,7 @@ export default function Navbar() {
           />
         </Link>
         {/* Navigation Items */}
-        <ul className="flex items-center gap-1 relative">
+        <ul className="flex items-center gap-1 relative mx-12">
           {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
@@ -101,7 +101,7 @@ export default function Navbar() {
         </ul>
 
         {/* Theme Toggle Button */}
-        <div className="pl-1 border-l border-zinc-200 dark:border-zinc-800">
+        <div className="pl-1">
           <ThemeToggle />
         </div>
       </nav>
