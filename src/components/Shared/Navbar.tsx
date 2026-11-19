@@ -21,8 +21,8 @@ export default function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pt-10">
-      <nav className="flex items-center gap-2 px-1.5 py-1.5 rounded-full border border-[#0000001A] dark:border-[#FFFFFF1A] bg-white dark:bg-[#181818] backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/40 transition-colors duration-300">
+    <header className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 pt-2 sm:pt-8 w-max max-w-[95vw]">
+      <nav className="flex items-center justify-between gap-1 sm:gap-2 px-1.5 py-1.5 rounded-full border border-[#0000001A] dark:border-[#FFFFFF1A] bg-white dark:bg-[#181818] backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/40 transition-colors duration-300">
         
         {/* Profile Avatar */}
         <Link href="/" className="shrink-0 group block">
@@ -32,11 +32,12 @@ export default function Navbar() {
             width={56}
             height={56}
             priority
-            className="w-14 h-14 m-auto rounded-full object-cover  transition-transform duration-200 group-hover:scale-105"
+            className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full object-cover transition-transform duration-200 group-hover:scale-105"
           />
         </Link>
+
         {/* Navigation Items */}
-        <ul className="flex items-center gap-1 relative mx-12">
+        <ul className="flex items-center gap-1 sm:gap-1.5 relative mx-2 sm:mx-6 md:mx-12">
           {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
@@ -46,17 +47,22 @@ export default function Navbar() {
               <li key={item.href} className="relative">
                 <Link
                   href={item.href}
+                  aria-label={item.label}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  className={`relative flex items-center gap-2 px-3 py-2 rounded-full text-sm transition-colors duration-200 ${
+                  className={`relative flex items-center justify-center gap-2 p-2.5 sm:px-3 sm:py-2 rounded-full text-sm transition-colors duration-200 ${
                     isActive
                       ? 'text-zinc-900 dark:text-white font-medium'
                       : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                   }`}
                 >
-                  <Icon className="w-4 h-4 relative z-10" />
+                  <Icon
+                    className={`w-[18px] h-[18px] sm:w-4 sm:h-4 relative z-10 transition-transform ${
+                      isActive ? 'stroke-[2.25]' : 'stroke-[1.75]'
+                    }`}
+                  />
 
-                  {/* Text expansion on hover */}
+                  {/* Text expansion on hover/active (Desktop & Tablet only) */}
                   <AnimatePresence>
                     {(isHovered || isActive) && (
                       <motion.span
@@ -64,7 +70,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
                         transition={{ duration: 0.2, ease: 'easeOut' }}
-                        className="overflow-hidden whitespace-nowrap text-xs font-medium relative z-10"
+                        className="hidden sm:inline-block overflow-hidden whitespace-nowrap text-xs font-medium relative z-10"
                       >
                         {item.label}
                       </motion.span>
@@ -75,7 +81,7 @@ export default function Navbar() {
                   {isHovered && (
                     <motion.div
                       layoutId="shooting-star-underline"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent rounded-full"
+                      className="hidden sm:block absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent rounded-full"
                       initial={{ scaleX: 0, opacity: 0 }}
                       animate={{ scaleX: 1, opacity: 1 }}
                       exit={{ scaleX: 0, opacity: 0 }}
@@ -101,7 +107,7 @@ export default function Navbar() {
         </ul>
 
         {/* Theme Toggle Button */}
-        <div className="pl-1">
+        <div className="shrink-0">
           <ThemeToggle />
         </div>
       </nav>

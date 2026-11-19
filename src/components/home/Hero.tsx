@@ -27,48 +27,9 @@ const fadeUpVariants = {
   },
 };
 
-interface InlineBadgePhotoProps {
-  src: string;
-  alt: string;
-}
-
-function InlineBadgePhoto({
-  src,
-  alt,
-}: InlineBadgePhotoProps) {
-  return (
-    <motion.span
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{
-        type: 'spring',
-        stiffness: 340,
-        damping: 20,
-        delay: 0.35,
-      }}
-      whileHover={{
-        scale: 1.15,
-        y: -4,
-        transition: { type: 'spring', stiffness: 420, damping: 16 },
-      }}
-      whileTap={{ scale: 0.95 }}
-      className="inline-inline-block align-middle mx-1.5 sm:mx-2 cursor-pointer select-none"
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={48}
-        height={48}
-        priority
-        className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-13 md:h-13 object-cover rounded-xl"
-      />
-    </motion.span>
-  );
-}
-
 export default function Hero() {
   return (
-    <section className="w-full pt-[6.9rem] pb-[6.35rem] sm:pt-28 sm:pb-32 px-6">
+    <section className="w-full lg:pt-[6.9rem] pt-[3.75rem] pb-20 sm:pt-28 sm:pb-32 px-6">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -78,120 +39,96 @@ export default function Hero() {
         {/* Eyebrow: Founder, [Logo] HerDeen */}
         <motion.div
           variants={fadeUpVariants}
-          className="inline-flex items-center gap-2.5 lg:mb-5 mb-2 text-[0.94rem] text-[#000000B2] dark:text-[#FFFFFFB2]"
+          className="inline-flex items-center gap-2.5 mb-3 lg:mb-5 text-[0.94rem] text-[#000000B2] dark:text-[#FFFFFFB2]"
         >
           <span>Founder,</span>
-            <a 
-                href="https://her-deen.vercel.app/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-10 h-10 transition-transform duration-200 hover:scale-110 hover:rotate-6 active:scale-95 cursor-pointer"
-                aria-label="HerDeen Website"
-            >
-                <Image
-                    src="/images/herdeen-logo.svg"
-                    alt="HerDeen"
-                    width={24}
-                    height={24}
-                    className="w-full h-full object-cover"
-                />
-            </a>
-          <span>
-            HerDeen
-          </span>
+          <a
+            href="https://her-deen.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 transition-transform duration-200 hover:scale-110 hover:rotate-6 active:scale-95 cursor-pointer"
+            aria-label="HerDeen Website"
+          >
+            <Image
+              src="/images/herdeen-logo.svg"
+              alt="HerDeen"
+              width={40}
+              height={40}
+              className="w-full h-full object-cover"
+            />
+          </a>
+          <span>HerDeen</span>
         </motion.div>
 
-        {/* Hero Headline with Inline Photo Tiles */}
+        {/* Primary Headline: Hi, I'm [hero-1] Sultanat. */}
         <motion.h1
-            variants={fadeUpVariants}
-            className="lg:text-[3rem] text-[2rem] leading-[1.3] tracking-tight flex flex-wrap items-center w-full text-[#000000] dark:text-[#FFFFFF]"
+          variants={fadeUpVariants}
+          className="text-[1.75rem] sm:text-[2.25rem] lg:text-[3rem] leading-[1.3] tracking-tight flex flex-wrap items-center gap-x-2 sm:gap-x-2.5 mb-3 sm:mb-2 w-full text-[#000000] dark:text-[#FFFFFF]"
         >
-            <span>Hi, I&apos;m</span>
-            <Image
-                src="/images/hero-1.svg"
-                alt="Sultanat"
-                width={80}
-                height={80}
-                className="w-14 h-14 lg:w-20 lg:h-20 object-contain translate-y-1.5 inline-flex items-center justify-center transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
-            />
-            <span>Sultanat.</span>
-            
-
-          {/*<span className="block font-normal text-[#525252] dark:text-zinc-400">
-            A{' '}
-            <InlineBadgePhoto
-              src="/images/hero-2.svg"
-              alt="Sultanat snapshot"
-            />{' '}
-            Frontend Developer{' '}
-            <InlineBadgePhoto
-              src="/images/hero-3.svg"
-              alt="Sultanat developer snapshot"
-            />{' '}
-            who loves bringing designs and ideas to life on the web.
-          </span> */}
+          <span>Hi, I&apos;m</span>
+          <Image
+            src="/images/hero-1.svg"
+            alt="Sultanat"
+            width={80}
+            height={80}
+            priority
+            className="w-11 h-11 sm:w-14 sm:h-14 lg:w-20 lg:h-20 object-contain translate-y-1 transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
+          />
+          <span>Sultanat.</span>
         </motion.h1>
 
-        {/* Hero Headline with Inline Photo Tiles */}
-        <motion.h2 
-            variants={fadeUpVariants}
-            className="lg:text-[2rem] text-[1.5rem] tracking-tight flex flex-wrap items-center w-[90%] text-[#000000B2] dark:text-[#FFFFFF] font-normal"
+        {/* Subtitle: Text-only on mobile, inline images on md+ */}
+        <motion.h2
+          variants={fadeUpVariants}
+          className="text-[1.45rem] sm:text-[1.75rem] lg:text-[2rem] leading-[1.38] tracking-tight w-full md:w-[90%] text-[#000000B2] dark:text-[#FFFFFFB2] font-normal"
         >
-            <span>A </span>
-            <Image
-                src="/images/hero-2.svg"
-                alt="Sultanat"
-                width={80}
-                height={80}
-                className="w-14 h-14 lg:w-20 lg:h-20 object-contain translate-y-1.5 inline-flex items-center justify-center transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
-            />
-            <span>Frontend Developer </span>
-            <Image
-                src="/images/hero-3.svg"
-                alt="Sultanat"
-                width={80}
-                height={80}
-                className="w-14 h-14 lg:w-20 lg:h-20 object-contain translate-y-1.5 inline-flex items-center justify-center transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
-            />
-            <span>who loves</span>
-            <span>bringing designs and ideas to life on the <br /> web. </span>
-            
-
-          {/*<span className="block font-normal text-[#525252] dark:text-zinc-400">
-            A{' '}
-            <InlineBadgePhoto
-              src="/images/hero-2.svg"
-              alt="Sultanat snapshot"
-            />{' '}
-            Frontend Developer{' '}
-            <InlineBadgePhoto
-              src="/images/hero-3.svg"
-              alt="Sultanat developer snapshot"
-            />{' '}
-            who loves bringing designs and ideas to life on the web.
-          </span> */}
+          A{' '}
+          <Image
+            src="/images/hero-2.svg"
+            alt="Sultanat snapshot"
+            width={80}
+            height={80}
+            className="hidden md:inline-block w-14 h-14 lg:w-20 lg:h-20 object-contain align-middle mx-1 transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
+          />{' '}
+          Frontend Developer{' '}
+          <Image
+            src="/images/hero-3.svg"
+            alt="Sultanat developer snapshot"
+            width={80}
+            height={80}
+            className="hidden md:inline-block w-14 h-14 lg:w-20 lg:h-20 object-contain align-middle mx-1 transition-transform duration-200 hover:scale-110 hover:-rotate-6 active:scale-95 cursor-pointer"
+          />{' '}
+          who loves bringing designs and ideas to life on the web.
         </motion.h2>
 
-        {/* Action Pill Buttons */}
+        {/* Action Pill Buttons: 50/50 full-width row on mobile, compact pills on sm+ */}
         <motion.div
           variants={fadeUpVariants}
-          className="flex flex-wrap items-center gap-3.5 mt-9"
+          className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-3 sm:gap-3.5 mt-8 sm:mt-9 w-full sm:w-auto"
         >
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="w-full sm:w-auto"
+          >
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center px-7 py-3 rounded-full text-sm font-medium bg-[#181818] text-white dark:bg-white dark:text-[#181818] shadow-xs hover:opacity-90 transition-opacity"
+              className="inline-flex items-center justify-center w-full sm:w-auto px-7 py-3.5 sm:py-3 rounded-full text-sm font-medium bg-[#181818] text-white dark:bg-white dark:text-[#181818] shadow-xs hover:opacity-90 transition-opacity"
             >
               Projects
             </Link>
           </motion.div>
 
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="w-full sm:w-auto"
+          >
             <a
               href="/Sultanat-CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-7 py-3 rounded-full text-sm font-medium bg-white text-[#181818] border border-zinc-200 dark:bg-zinc-950 dark:text-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+              className="inline-flex items-center justify-center w-full sm:w-auto px-7 py-3.5 sm:py-3 rounded-full text-sm font-medium bg-white text-[#181818] border border-zinc-200 dark:bg-transparent dark:text-zinc-200 dark:border-[#FFFFFF26] hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
             >
               View my CV
             </a>
